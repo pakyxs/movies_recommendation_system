@@ -1,3 +1,4 @@
 /venv
 /PI_ML_OPS-main
-/datasets
+/datasets/raw
+/notebooks/funciones.ipynb

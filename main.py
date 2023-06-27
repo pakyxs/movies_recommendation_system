@@ -1,23 +1,27 @@
+from fastapi import FastAPI
 import pandas as pd
 import numpy as np
 import ast
 from datetime import datetime
 from sklearn.metrics.pairwise import sigmoid_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
-from fastapi import FastAPI
 
-
+app = FastAPI()
 
 
 @app.get('/cantidad_filmaciones_mes/{mes}')
 def cantidad_filmaciones_mes(Mes:str):
     "Se ingresa un mes en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en el mes consultado en la totalidad del dataset."
 
+    # Cargando datos del archivo csv
+    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+
+    
     def obtain_month_number(Mes):
         months = {
             "enero": 1,
             "febrero": 2,
-            "marzo": 3,
+            "marzo": 3, 
             "abril": 4,
             "mayo": 5,
             "junio": 6,
@@ -58,10 +62,14 @@ def cantidad_filmaciones_mes(Mes:str):
     response = {'mes': Mes.lower(), 'cantidad': count}
     return response
 
+
 @app.get('/cantidad_filmaciones_dia{dia}')
 def cantidad_filmaciones_dia(Dia:str):
     "Se ingresa un día en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en día consultado en la totalidad del dataset."
 
+    # Cargando datos del archivo csv
+    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    
     def obtain_day_number(Dia):
         days = {
             "lunes": 1,
@@ -109,6 +117,9 @@ def cantidad_filmaciones_dia(Dia:str):
 def score_titulo(titulo_de_la_filmación:str):
     "Se ingresa el título de una filmación devuelve como respuesta el título, el año de estreno y el score"
 
+    # Cargando datos del archivo csv
+    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    
     response =[ ]
     for idx, row in enumerate(df["title"]):  # Recorremos los valores de la columna title
         if (row.lower() == titulo_de_la_filmación.lower()):  # Si el valor de la fila se encuentra dentro de la columna se guarda en la lista response en forma de diccionario
@@ -126,11 +137,16 @@ def score_titulo(titulo_de_la_filmación:str):
 
 
 
+
 @app.get('/votos_titulo/{titulo}')
 def votos_titulo(titulo_de_la_filmación:str):
     """Se ingresa el título de una filmación esperando como respuesta el título, la cantidad de votos y el valor promedio de las votaciones.
     La misma variable deberá de contar con al menos 2000 valoraciones, caso contrario, debemos contar con un mensaje avisando que no cumple esta condición y que por ende,
     no se devuelve ningun valor."""
+
+    # Cargando datos del archivo csv
+    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    
     response = []
     for idx, row in enumerate(df['title']):
         if (row.lower() == titulo_de_la_filmación.lower()):
@@ -156,7 +172,10 @@ def votos_titulo(titulo_de_la_filmación:str):
 def get_actor(nombre_actor:str):
     """Se ingresa el nombre de un actor que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno. 
     Además, la cantidad de películas que en las que ha participado y el promedio de retorno"""
-    
+
+    # Cargando datos de los archivos csv
+    df_cast = pd.read_csv("../datasets/model/cast.csv", sep=",", low_memory=False)
+    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
     # Creamos una lista para almacenar los valores de 'movie_id'
     lista_movie_id = []
 
@@ -193,13 +212,16 @@ def get_actor(nombre_actor:str):
 def get_director(nombre_director:str):
     ''' Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno. 
     Además, deberá devolver el nombre de cada película con la fecha de lanzamiento, retorno individual, costo y ganancia de la misma.'''
-    
+
+    # Cargando datos de los archivos csv
+    df_director = pd.read_csv("../datasets/model/director.csv", sep=",", low_memory=False)
+    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
     
     # Creamos una lista para almacenar los valores de 'movie_id'
     lista_movie_id = []
 
     # Buscamos el valor en la columna 'name' y extraemos el valor correspondiente en 'movie_id'
-    filas_encontradas = df_crew.loc[(df_crew['name'].str.lower() == nombre_director.lower()) & (df_crew['job'].str.lower() == 'director')]
+    filas_encontradas = df_director.loc[(df_director['name'].str.lower() == nombre_director.lower())]
     
     # Iterar sobre las filas encontradas y extraer los valores de 'movie_id'
     for index, row in filas_encontradas.iterrows():
@@ -229,6 +251,7 @@ def get_director(nombre_director:str):
         movies_list_dict.append(movies_dict)
 
     
+
     response = {'director':nombre_director, 'retorno_total_director':total_return, 
                 'peliculas':movies_list_dict}
     
@@ -238,7 +261,12 @@ def get_director(nombre_director:str):
 
 @app.get('/recomendacion/{titulo}')
 def recomendacion(titulo:str):
-    if (df_sample['title'].str.lower()).isin([titulo.lower()]).any():
+    '''Ingresas un nombre de pelicula y te recomienda las cinco más similares en una lista'''
+    # Cargando datos del archivo csv
+    df = pd.read_csv("../datasets/model/sample.csv", sep=",", low_memory=False)
+
+
+    if (df['title'].str.lower()).isin([titulo.lower()]).any():
 
         tfv = TfidfVectorizer(min_df=3,  max_features=None,
                 strip_accents='unicode', analyzer='word',token_pattern=r'\w{1,}',
@@ -246,14 +274,14 @@ def recomendacion(titulo:str):
                 stop_words = 'english')
         
         # Ajustamos el TF-IDF sobre el texto 'overview'
-        tfv_matrix = tfv.fit_transform(df_sample['overview'])
+        tfv_matrix = tfv.fit_transform(df['overview'])
 
         # Computamos el kernel sigmoide
         sig = sigmoid_kernel(tfv_matrix, tfv_matrix)
         
         
         # Hacemos reverse mapping de los indices y los títulos de las películas
-        indices = pd.Series(df_sample.index, index=df_sample['title'].str.lower()).drop_duplicates()
+        indices = pd.Series(df.index, index=df['title'].str.lower()).drop_duplicates()
 
         # Obtenemos el indice de la película
         idx = indices[titulo.lower()]
@@ -271,7 +299,7 @@ def recomendacion(titulo:str):
         movie_indices = [i[0] for i in sig_scores]
 
         # Guardamos los títulos de las películas en una variable para después mostrarla
-        valores_columna = df_sample.loc[movie_indices, 'title'].values
+        valores_columna = df.loc[movie_indices, 'title'].values
 
         response = list(valores_columna)
         return response
