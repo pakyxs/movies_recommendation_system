@@ -59,12 +59,16 @@ Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy
 Para desarrollar la API utilicé FastAPI y para desplegarla Render.
 
 
-Contenido de carpetas
+Contenido de carpetas:
 
 datasets/raw: datasets crudos.
+
 datasets/model: datasets modificados para utilizar con el modelo.
+
 notebooks: notebooks de ETL y EDA y funciones.
+
 main.py: script de funciones para el despliegue.
+
 requirements.txt: librerías necesarias para el proyecto.
 
 
