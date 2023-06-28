@@ -15,7 +15,7 @@ En este proyecto desarrollé y desplegé un modelo de recomendación basado en c
 
 Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv  
 
-**Contenido de la tabla movies_dataset.csv:**
+**`Contenido de la tabla movies_dataset.csv:`**
 
 | Característica         | Descripción                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------------- |
@@ -46,7 +46,7 @@ Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv
 
 
 
-**Contenido de la tabla credits.csv:**
+**`Contenido de la tabla credits.csv:`**
 
 | Característica         | Descripción                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------------- |
@@ -54,12 +54,12 @@ Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv
 | cast                   | Un diccionario que indica el equipo de actores que trabajó en la película             |
 | crew                   | Un diccionario que indica el equipo de dirección que trabajó en la película           |
 
-**Requerimientos:**
+**`Requerimientos:`**
 Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy , Datetime y Skitlearn.
 Para desarrollar la API utilicé FastAPI y para desplegarla Render.
 
 
-**Contenido de carpetas:**
+**`Contenido de carpetas:`**
 
 datasets/raw: datasets crudos.
 
@@ -72,7 +72,7 @@ main.py: script de funciones para el despliegue.
 requirements.txt: librerías necesarias para el proyecto.
 
 
-**Instrucciones:**
+**`Instrucciones:`**
 1) Instalar las siguientes librerías: Pandas, Numpy , Datetime, Skitlearn y FastAPI.
 2) Descargar los archivos movies_dataset.csv y credits.csv del siguiente link en la carpeta datasets/raw:
    [Dataset](https://drive.google.com/drive/folders/1nvSjC2JWUH48o3pb8xlKofi8SNHuNWeu).
@@ -82,7 +82,7 @@ requirements.txt: librerías necesarias para el proyecto.
    En este script se encuentran las transformaciones que le realizamos a los datasets para después ser consumidor por el modelo.
 
 
-**API endpoints:**
+**`API endpoints:`**
 
 + @app.get('/cantidad_filmaciones_mes/{mes}'): Se ingresa un mes en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en el mes consultado en la totalidad del dataset.
   
@@ -103,6 +103,6 @@ requirements.txt: librerías necesarias para el proyecto.
 + @app.get('/recomendacion/{titulo}'): Ingresas un nombre de pelicula y te recomienda las cinco más similares en una lista.
 
 
-**Link en Render:**
+**`Link en Render:`**
 + https://pakyxs-movies-recommendation-system.onrender.com/docs
 
