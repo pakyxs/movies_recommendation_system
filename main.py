@@ -301,9 +301,9 @@ def recomendacion(titulo:str):
 
         # Guardamos los títulos de las películas en una variable para después mostrarla
         valores_columna = df.loc[movie_indices, 'title'].values
-
         response = list(valores_columna)
         return response
     else:
-        return print(f"La película {titulo} no está en la lista, por favor ingrese otra.")
+        respuesta = f'La película {titulo} no está en la lista, por favor ingrese otra.'
+        return {'error not found': respuesta}
 
