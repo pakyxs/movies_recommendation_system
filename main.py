@@ -15,7 +15,7 @@ def cantidad_filmaciones_mes(mes:str):
     "Se ingresa un mes en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en el mes consultado en la totalidad del dataset."
 
     # Cargando datos del archivo csv
-    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
 
     
     def obtain_month_number(mes):
@@ -69,7 +69,7 @@ def cantidad_filmaciones_dia(dia:str):
     "Se ingresa un día en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en día consultado en la totalidad del dataset."
 
     # Cargando datos del archivo csv
-    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     
     def obtain_day_number(dia):
         days = {
@@ -119,7 +119,7 @@ def score_titulo(titulo_de_la_filmación:str):
     "Se ingresa el título de una filmación devuelve como respuesta el título, el año de estreno y el score"
 
     # Cargando datos del archivo csv
-    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     
     response =[ ]
     for idx, row in enumerate(df["title"]):  # Recorremos los valores de la columna title
@@ -146,7 +146,7 @@ def votos_titulo(titulo_de_la_filmación:str):
     no se devuelve ningun valor."""
 
     # Cargando datos del archivo csv
-    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     
     response = []
     for idx, row in enumerate(df['title']):
@@ -175,8 +175,8 @@ def get_actor(nombre_actor:str):
     Además, la cantidad de películas que en las que ha participado y el promedio de retorno"""
 
     # Cargando datos de los archivos csv
-    df_cast = pd.read_csv(dir+"cast.csv", sep=",", low_memory=False)
-    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
+    df_cast = pd.read_csv(dir+"/cast.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     # Creamos una lista para almacenar los valores de 'movie_id'
     lista_movie_id = []
 
@@ -215,7 +215,7 @@ def get_director(nombre_director:str):
     Además, deberá devolver el nombre de cada película con la fecha de lanzamiento, retorno individual, costo y ganancia de la misma.'''
 
     # Cargando datos de los archivos csv
-    df_director = pd.read_csv(dir+"director.csv", sep=",", low_memory=False)
+    df_director = pd.read_csv(dir+"/director.csv", sep=",", low_memory=False)
     df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
     
     # Creamos una lista para almacenar los valores de 'movie_id'
@@ -264,7 +264,7 @@ def get_director(nombre_director:str):
 def recomendacion(titulo:str):
     '''Ingresas un nombre de pelicula y te recomienda las cinco más similares en una lista'''
     # Cargando datos del archivo csv
-    df = pd.read_csv(dir+"sample.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"/sample.csv", sep=",", low_memory=False)
 
 
     if (df['title'].str.lower()).isin([titulo.lower()]).any():
