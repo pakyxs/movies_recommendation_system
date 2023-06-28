@@ -3,9 +3,9 @@
 
 ¿Alguna vez te has preguntado cómo Netflix te recomienda películas para ver? ¿Cuál es la idea en la que se basa esta recomendación?
 
-Resulta que existen tres tipos de recomendaciones posibles. Veamos cuáles son.
+Resulta que existen varios tipos de recomendaciones posibles.
 
-Tres sistemas de recomendación populares:
+los tres  sistemas de recomendación más populares son:
 
   1.Motor de recomendación basado en popularidad
   
@@ -57,8 +57,8 @@ Contenido de la tabla credits.csv:
 | crew                   | Un diccionario que indica el equipo de dirección que trabajó en la película           |
 
 Requerimientos:
-Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy y Skitlearn.
-Para desarrollar la API utilicé FastApi y para desplegarla Render.
+Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy , Datetime y Skitlearn.
+Para desarrollar la API utilicé FastAPI y para desplegarla Render.
 
 
 Contenido de carpetas
@@ -70,8 +70,15 @@ main.py: script de funciones para el despliegue.
 requirements.txt: librerías necesarias para el proyecto.
 
 
-Instrucciones de Ejecución
-Para disponibilizar los datos es necesario: a) Correr previamente el notebook etl.ipynb, el cual extrae y transforma los datatasets originales. b) Ejecutamos el notebook eda.ipynb donde buscamos la relación entre el budget y la revenue, analizamos los datos atípicos con la variable popularity, por último generamos una nube de palabras de la columna 'title'.
+Instrucciones:
+1) Instalar las siguientes librerías: Pandas, Numpy , Datetime, Skitlearn y FastAPI.
+2) Descargar los archivos movies_dataset.csv y credits.csv del siguiente link en la carpeta datasets/raw:
+   [Dataset](https://drive.google.com/drive/folders/1nvSjC2JWUH48o3pb8xlKofi8SNHuNWeu).
+3) Ejecutar el archivo EDA.ipynb que se encuentra en la carpeta notebooks:
+   En este script se encuentra el análisis de los datos, de aquí sacamos los fundamentos para realizar las transformaciones que vamos a realizar.
+4) Ejecutar el archivo ETL.ipynb que se encuentra en la carpeta notebooks:
+   En este script se encuentran las transformaciones que le realizamos a los datasets para después ser consumidor por el modelo.
+
 
 API endpoints
 API en Render: 
