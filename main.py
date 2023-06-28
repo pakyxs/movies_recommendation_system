@@ -5,19 +5,20 @@ import ast
 from datetime import datetime
 from sklearn.metrics.pairwise import sigmoid_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
-
+import os
 app = FastAPI()
 
+dir = os.getcwd()+'/datasets/model' 
 
 @app.get('/cantidad_filmaciones_mes/{mes}')
-def cantidad_filmaciones_mes(Mes:str):
+def cantidad_filmaciones_mes(mes:str):
     "Se ingresa un mes en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en el mes consultado en la totalidad del dataset."
 
     # Cargando datos del archivo csv
-    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
 
     
-    def obtain_month_number(Mes):
+    def obtain_month_number(mes):
         months = {
             "enero": 1,
             "febrero": 2,
@@ -33,9 +34,9 @@ def cantidad_filmaciones_mes(Mes:str):
             "diciembre": 12,
         }
 
-        Mes = Mes.lower()  # Convertimos el mes ingresado a minúsculas
+        mes = mes.lower()  # Convertimos el mes ingresado a minúsculas
         month_number = months.get(
-            Mes
+            mes
         )  # Buscamos en el diccionario el número correspondiente al mes ingresado y lo asignamos a la variable month_number
 
         if month_number:
@@ -43,7 +44,7 @@ def cantidad_filmaciones_mes(Mes:str):
         else:
             return None
 
-    month_number = obtain_month_number(Mes)
+    month_number = obtain_month_number(mes)
     # Ponemos la condición que si no encuentra el mes retorne un mensaje para que lo ingrese correctamente, sino nos retorna la cantidad de películas estrenadas en ese mes.
     if month_number == None:
         return print(
@@ -59,18 +60,18 @@ def cantidad_filmaciones_mes(Mes:str):
                 pd.to_datetime(row).month == month_number
             ):  # Ponemos la condición que si número del mes coincide con el de la variable month_number, entonces aumenta el contador en una unidad
                 count += 1
-    response = {'mes': Mes.lower(), 'cantidad': count}
+    response = {'mes': mes.lower(), 'cantidad': count}
     return response
 
 
 @app.get('/cantidad_filmaciones_dia{dia}')
-def cantidad_filmaciones_dia(Dia:str):
+def cantidad_filmaciones_dia(dia:str):
     "Se ingresa un día en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en día consultado en la totalidad del dataset."
 
     # Cargando datos del archivo csv
     df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
     
-    def obtain_day_number(Dia):
+    def obtain_day_number(dia):
         days = {
             "lunes": 1,
             "martes": 2,
@@ -81,9 +82,9 @@ def cantidad_filmaciones_dia(Dia:str):
             "domingo": 7,
         }
 
-        Dia = Dia.lower()  # Convertimos el día ingresado a minúsculas
+        dia = dia.lower()  # Convertimos el día ingresado a minúsculas
         day_number = days.get(
-            Dia
+            dia
         )  # Buscamos en el diccionario el número correspondiente al día ingresado y lo asigna a la variable day_number
 
         if day_number:
@@ -91,7 +92,7 @@ def cantidad_filmaciones_dia(Dia:str):
         else:
             return None
 
-    day_number = obtain_day_number(Dia)
+    day_number = obtain_day_number(dia)
     # Ponemos la condición que si no encuentra el día retorne un mensaje para que lo ingrese correctamente, sino nos retorna la cantidad de películas estrenadas en ese día.
     if day_number == None:
         return print(
@@ -107,7 +108,7 @@ def cantidad_filmaciones_dia(Dia:str):
                 pd.to_datetime(row).day == day_number
             ):  # Ponemos la condición que si número del día coincide con el de la variable day_number, entonces aumenta el contador en una unidad
                 count += 1
-    response = {'dia': Dia.lower(), 'cantidad': count}
+    response = {'dia': dia.lower(), 'cantidad': count}
     return response
 
 
@@ -145,7 +146,7 @@ def votos_titulo(titulo_de_la_filmación:str):
     no se devuelve ningun valor."""
 
     # Cargando datos del archivo csv
-    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
     
     response = []
     for idx, row in enumerate(df['title']):
@@ -174,8 +175,8 @@ def get_actor(nombre_actor:str):
     Además, la cantidad de películas que en las que ha participado y el promedio de retorno"""
 
     # Cargando datos de los archivos csv
-    df_cast = pd.read_csv("../datasets/model/cast.csv", sep=",", low_memory=False)
-    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    df_cast = pd.read_csv(dir+"cast.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
     # Creamos una lista para almacenar los valores de 'movie_id'
     lista_movie_id = []
 
@@ -214,8 +215,8 @@ def get_director(nombre_director:str):
     Además, deberá devolver el nombre de cada película con la fecha de lanzamiento, retorno individual, costo y ganancia de la misma.'''
 
     # Cargando datos de los archivos csv
-    df_director = pd.read_csv("../datasets/model/director.csv", sep=",", low_memory=False)
-    df = pd.read_csv("../datasets/model/movies.csv", sep=",", low_memory=False)
+    df_director = pd.read_csv(dir+"director.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
     
     # Creamos una lista para almacenar los valores de 'movie_id'
     lista_movie_id = []
@@ -263,7 +264,7 @@ def get_director(nombre_director:str):
 def recomendacion(titulo:str):
     '''Ingresas un nombre de pelicula y te recomienda las cinco más similares en una lista'''
     # Cargando datos del archivo csv
-    df = pd.read_csv("../datasets/model/sample.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"sample.csv", sep=",", low_memory=False)
 
 
     if (df['title'].str.lower()).isin([titulo.lower()]).any():
