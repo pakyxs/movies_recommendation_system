@@ -55,6 +55,7 @@ Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv
 | crew                   | Un diccionario que indica el equipo de dirección que trabajó en la película           |
 
 **`Requerimientos:`**
+
 Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy , Datetime y Skitlearn.
 Para desarrollar la API utilicé FastAPI y para desplegarla Render.
 
