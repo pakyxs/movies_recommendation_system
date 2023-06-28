@@ -3,9 +3,7 @@
 
 ¿Alguna vez te has preguntado cómo Netflix te recomienda películas para ver? ¿Cuál es la idea en la que se basa esta recomendación?
 
-Resulta que existen varios tipos de recomendaciones posibles.
-
-los tres  sistemas de recomendación más populares son:
+Resulta que existen varios tipos de recomendaciones posibles. Entre ellos, los tres  sistemas de recomendación más populares son:
 
   1.Motor de recomendación basado en popularidad
   
@@ -80,6 +78,27 @@ Instrucciones:
    En este script se encuentran las transformaciones que le realizamos a los datasets para después ser consumidor por el modelo.
 
 
-API endpoints
-API en Render: 
+API endpoints:
+
++ @app.get('/cantidad_filmaciones_mes/{mes}'): Se ingresa un mes en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en el mes consultado en la totalidad del dataset.
+  
++ @app.get('/cantidad_filmaciones_dia{dia}'): Se ingresa un día en idioma Español. Devuelve la cantidad de películas que fueron estrenadas en día consultado en la totalidad del dataset.
+ 
++ @app.get('/score_titulo/{titulo}'): Se ingresa el título de una filmación devuelve como respuesta el título, el año de estreno y el score.
+ 
++ @app.get('/votos_titulo/{titulo}'): Se ingresa el título de una filmación esperando como respuesta el título, la cantidad de votos y el valor promedio de las votaciones.
+    La misma variable deberá de contar con al menos 2000 valoraciones, caso contrario, debemos contar con un mensaje avisando que no cumple esta condición y que por ende,
+    no se devuelve ningun valor.
+
++ @app.get('/get_actor/{nombre_actor}'): Se ingresa el nombre de un actor que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno.
+    Además, la cantidad de películas que en las que ha participado y el promedio de retorno.
+  
++ @app.get('/get_director/{nombre_director}'): Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno. 
+    Además, deberá devolver el nombre de cada película con la fecha de lanzamiento, retorno individual, costo y ganancia de la misma.
+  
++ @app.get('/recomendacion/{titulo}'): Ingresas un nombre de pelicula y te recomienda las cinco más similares en una lista.
+
+
+Link en Render:
++ https://pakyxs-movies-recommendation-system.onrender.com/docs
 
