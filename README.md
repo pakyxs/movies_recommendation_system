@@ -101,7 +101,7 @@ requirements.txt: librerías necesarias para el proyecto.
 + @app.get('/get_director/{nombre_director}'): Se ingresa el nombre de un director que se encuentre dentro de un dataset debiendo devolver el éxito del mismo medido a través del retorno. 
     Además, deberá devolver el nombre de cada película con la fecha de lanzamiento, retorno individual, costo y ganancia de la misma.
   
-+ @app.get('/recomendacion/{titulo}'): Ingresas un nombre de pelicula y te recomienda las cinco más similares en una lista.
++ @app.get('/recomendacion/{titulo}'): Se ingresa un nombre de pelicula y te recomienda las cinco más similares en una lista.
 
 
 **`Link en Render:`**
