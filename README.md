@@ -109,7 +109,7 @@ requirements.txt: librerías necesarias para el proyecto.
 + https://pakyxs-movies-recommendation-system.onrender.com/docs
 
 **`Observaciones:`**
-Ya que utilizamos un dataframe de muestra llamado sample, no todas las películas del dataset se encuentran desplegadas en el modelo. Para verificar que funciona les facilito algunos títulos que se incluyen en sample:
++  Como utilizamos un dataframe de muestra llamado sample, no todas las películas del dataset se encuentran en el modelo desplegado . Para verificar que funciona les facilito algunos títulos que se incluyen en sample:
 ['Winning',
  'New Tale of Zatôichi',
  'Pocket Money',
