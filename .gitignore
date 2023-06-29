@@ -3,3 +3,4 @@
 /datasets/raw
 /notebooks/funciones.ipynb
 .gitignore
+/__pycache__

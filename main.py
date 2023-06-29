@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import os
 app = FastAPI()
 
+# Asignamos el path relativo a la variable dir para utilizarla a la hora de consumir los datasets
 dir = os.getcwd()+'/datasets/model' 
 
 @app.get('/cantidad_filmaciones_mes/{mes}')
