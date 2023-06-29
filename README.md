@@ -56,22 +56,22 @@ Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv
 
 **`Requerimientos:`**
 
-Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy , Datetime y Skitlearn.
++  Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy , Datetime y Skitlearn.
 
-Para desarrollar la API utilicé FastAPI y para desplegarla Render.
++  Para desarrollar la API utilicé FastAPI y para desplegarla Render.
 
 
 **`Contenido de carpetas:`**
 
-datasets/raw: datasets crudos.
++  datasets/raw: datasets crudos.
 
-datasets/model: datasets modificados para utilizar con el modelo.
++  datasets/model: datasets modificados para utilizar con el modelo.
 
-notebooks: notebooks de ETL y EDA y funciones.
++  notebooks: notebooks de ETL y EDA y funciones.
 
-main.py: script de funciones para el despliegue.
++  main.py: script de funciones para el despliegue.
 
-requirements.txt: librerías necesarias para el proyecto.
++  requirements.txt: librerías necesarias para el proyecto.
 
 
 **`Instrucciones:`**
