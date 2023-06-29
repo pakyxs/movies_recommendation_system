@@ -57,6 +57,7 @@ Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv
 **`Requerimientos:`**
 
 Las librerías que necesité para realizar el EDA y el ETL fueron: Pandas, Numpy , Datetime y Skitlearn.
+
 Para desarrollar la API utilicé FastAPI y para desplegarla Render.
 
 
@@ -106,4 +107,13 @@ requirements.txt: librerías necesarias para el proyecto.
 
 **`Link en Render:`**
 + https://pakyxs-movies-recommendation-system.onrender.com/docs
+
+**`Observaciones:`**
+Ya que utilizamos un dataframe de muestra llamado sample, no todas las películas del dataset se encuentran desplegadas en el modelo. Para verificar que funciona les facilito algunos títulos que se incluyen en sample:
+['Winning',
+ 'New Tale of Zatôichi',
+ 'Pocket Money',
+ 'Violent City',
+ 'The Big Circus',
+ 'Stolen Kisses']
 
