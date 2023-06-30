@@ -130,7 +130,8 @@ def score_titulo(titulo_de_la_filmacion:str):
 
     # Si el df_match está vacío quiere decir que la película no se encuentra en el dataframe
     if len(df_match) == 0: 
-        return print(f"La película {titulo_de_la_filmacion} no se encontró, por favor ingrese otra.")
+        respuesta = f'La película {titulo_de_la_filmacion} no está en la lista, por favor ingrese otra.'
+        return {'error not found': respuesta}
     
     response = {"título": titulo_de_la_filmacion.title(),
                 "anio": df_match["release_year"].iloc[0],
@@ -164,7 +165,7 @@ def votos_titulo(titulo_de_la_filmacion:str):
           
     if len(response) == 0: # Si la lista está vacía quiere decir que no se encontró ningun valor, devuelve el siguiente mensaje.
         respuesta = f'La película {titulo_de_la_filmacion} no cuenta con al menos 2000 valoraciones, por favor ingrese otra.'
-        return {'error not found': respuesta}
+        return {'error minimum votes': respuesta}
     
     else:
         return response
