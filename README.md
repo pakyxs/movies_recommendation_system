@@ -76,15 +76,15 @@ Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv
 
 **`Instrucciones:`**
 1) Crear un entorno virtual.
-1) Instalar las librerías que contiene el archivo requirement.txt con el siguiente código (sin comillas): "pip install -r requirements.txt"
-2) Descargar los archivos movies_dataset.csv y credits.csv del siguiente link en la carpeta datasets/raw:
+2) Instalar las librerías que contiene el archivo requirement.txt con el siguiente código (sin comillas): "pip install -r requirements.txt"
+3) Descargar los archivos movies_dataset.csv y credits.csv del siguiente link en la carpeta datasets/raw:
    [Dataset](https://drive.google.com/drive/folders/1nvSjC2JWUH48o3pb8xlKofi8SNHuNWeu).
-3) Ejecutar el archivo EDA.ipynb que se encuentra en la carpeta notebooks:
+4) Ejecutar el archivo EDA.ipynb que se encuentra en la carpeta notebooks:
    En este script se encuentra el análisis de los datos, de aquí sacamos los fundamentos para realizar las transformaciones que vamos a realizar.
-4) Ejecutar el archivo ETL.ipynb que se encuentra en la carpeta notebooks:
+5) Ejecutar el archivo ETL.ipynb que se encuentra en la carpeta notebooks:
    En este script se encuentran las transformaciones que le realizamos a los datasets para después ser consumidor por el modelo.
-5) Subir repositorio a nuestro GitHub.
-6) Crear una cuenta en render.com y desplegar el modelo ahí.
+6) Subir repositorio a nuestro GitHub.
+7) Crear una cuenta en render.com y desplegar el modelo ahí.
 
 
 **`API endpoints:`**
