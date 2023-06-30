@@ -115,7 +115,7 @@ def cantidad_filmaciones_dia(dia:str):
 
 
 
-@app.get('/score_titulo/{titulo}')
+@app.get('/score_titulo/{titulo_de_la_filmacion}')
 def score_titulo(titulo_de_la_filmacion:str):
     "Se ingresa el título de una filmación devuelve como respuesta el título, el año de estreno y el score"
 
@@ -142,7 +142,7 @@ def score_titulo(titulo_de_la_filmacion:str):
 
 
 
-@app.get('/votos_titulo/{titulo}')
+@app.get('/votos_titulo/{titulo_de_la_filmacion}')
 def votos_titulo(titulo_de_la_filmacion:str):
     """Se ingresa el título de una filmación esperando como respuesta el título, la cantidad de votos y el valor promedio de las votaciones.
     La misma variable deberá de contar con al menos 2000 valoraciones, caso contrario, debemos contar con un mensaje avisando que no cumple esta condición y que por ende,
