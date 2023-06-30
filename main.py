@@ -161,7 +161,8 @@ def votos_titulo(titulo_de_la_filmación:str):
                 })
           
     if len(response) == 0: # Si la lista está vacía quiere decir que no se encontró ningun valor, devuelve el siguiente mensaje.
-        return print(f"La película {titulo_de_la_filmación} no cuenta con al menos 2000 valoraciones, por favor ingrese otra.")
+        respuesta = f'La película {titulo_de_la_filmación} no cuenta con al menos 2000 valoraciones, por favor ingrese otra.'
+        return {'error not found': respuesta}
     
     else:
         return response
@@ -217,7 +218,7 @@ def get_director(nombre_director:str):
 
     # Cargando datos de los archivos csv
     df_director = pd.read_csv(dir+"/director.csv", sep=",", low_memory=False)
-    df = pd.read_csv(dir+"movies.csv", sep=",", low_memory=False)
+    df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     
     # Creamos una lista para almacenar los valores de 'movie_id'
     lista_movie_id = []
