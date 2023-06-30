@@ -119,24 +119,23 @@ def cantidad_filmaciones_dia(dia:str):
 def score_titulo(titulo_de_la_filmación:str):
     "Se ingresa el título de una filmación devuelve como respuesta el título, el año de estreno y el score"
 
-    # Cargando datos del archivo csv
+    # Cargamos datos del archivo csv
     df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     
-    response = []
+    # Convertimos el titulo a minúsculas para evitar errores
+    df['title'] = df['title'].str.lower()
+    
+    # Creamos un df_match en el cual guardamos las filas que coinciden con el titulo
+    df_match = df[df["title"].str.contains(titulo_de_la_filmación.lower())]
 
-    for row in df["title"]:
-        if row.lower() == titulo_de_la_filmación.lower():
-            idx = df["title"].tolist().index(row)  # Obtener el índice correspondiente al valor de la fila
-            response.append({
-                "título": df["title"][idx],
-                "anio": df["release_year"][idx],
-                "popularidad": df["popularity"][idx]
-            })
-
-    if len(response) == 0: # Si la lista está vacía quiere decir que no se encontró ningun valor, devuelve el siguiente mensaje.
+    # Si el df_match está vacío quiere decir que la película no se encuentra en el dataframe
+    if len(df_match) == 0: # Si la lista está vacía quiere decir que no se encontró ningun valor, devuelve el siguiente mensaje.
         return print(f"La película {titulo_de_la_filmación} no se encontró, por favor ingrese otra.")
-    else:
-        return response
+    
+    response = {"título": titulo_de_la_filmación.title(),
+                "anio": df_match["release_year"].iloc[0],
+                "popularidad": df_match["popularity"].iloc[0]}
+    return response
 
 
 
@@ -149,7 +148,7 @@ def votos_titulo(titulo_de_la_filmación:str):
     La misma variable deberá de contar con al menos 2000 valoraciones, caso contrario, debemos contar con un mensaje avisando que no cumple esta condición y que por ende,
     no se devuelve ningun valor."""
 
-    # Cargando datos del archivo csv
+    # Carganmos datos del archivo csv
     df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     
     response = []
