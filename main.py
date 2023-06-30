@@ -116,7 +116,7 @@ def cantidad_filmaciones_dia(dia:str):
 
 
 @app.get('/score_titulo/{titulo}')
-def score_titulo(titulo_de_la_filmación:str):
+def score_titulo(titulo_de_la_filmacion:str):
     "Se ingresa el título de una filmación devuelve como respuesta el título, el año de estreno y el score"
 
     # Cargamos datos del archivo csv
@@ -126,18 +126,16 @@ def score_titulo(titulo_de_la_filmación:str):
     df['title'] = df['title'].str.lower()
     
     # Creamos un df_match en el cual guardamos las filas que coinciden con el titulo
-    df_match = df[df["title"].str.contains(titulo_de_la_filmación.lower())]
+    df_match = df[df["title"].str.contains(titulo_de_la_filmacion.lower())]
 
     # Si el df_match está vacío quiere decir que la película no se encuentra en el dataframe
     if len(df_match) == 0: 
-        return print(f"La película {titulo_de_la_filmación} no se encontró, por favor ingrese otra.")
+        return print(f"La película {titulo_de_la_filmacion} no se encontró, por favor ingrese otra.")
     
-    #response = {"título": titulo_de_la_filmación.title(),
-    #            "anio": df_match["release_year"].iloc[0],
-    #            "popularidad": df_match["popularity"].iloc[0]}
-    return {"título": titulo_de_la_filmación.title(),
+    response = {"título": titulo_de_la_filmacion.title(),
                 "anio": df_match["release_year"].iloc[0],
                 "popularidad": df_match["popularity"].iloc[0]}
+    return response
 
 
 
@@ -145,7 +143,7 @@ def score_titulo(titulo_de_la_filmación:str):
 
 
 @app.get('/votos_titulo/{titulo}')
-def votos_titulo(titulo_de_la_filmación:str):
+def votos_titulo(titulo_de_la_filmacion:str):
     """Se ingresa el título de una filmación esperando como respuesta el título, la cantidad de votos y el valor promedio de las votaciones.
     La misma variable deberá de contar con al menos 2000 valoraciones, caso contrario, debemos contar con un mensaje avisando que no cumple esta condición y que por ende,
     no se devuelve ningun valor."""
@@ -155,7 +153,7 @@ def votos_titulo(titulo_de_la_filmación:str):
     
     response = []
     for idx, row in enumerate(df['title']):
-        if (row.lower() == titulo_de_la_filmación.lower()):
+        if (row.lower() == titulo_de_la_filmacion.lower()):
             if df['vote_count'][idx] >= 2000:
                 response.append({
                 "título": df["title"][idx],
@@ -165,7 +163,7 @@ def votos_titulo(titulo_de_la_filmación:str):
                 })
           
     if len(response) == 0: # Si la lista está vacía quiere decir que no se encontró ningun valor, devuelve el siguiente mensaje.
-        respuesta = f'La película {titulo_de_la_filmación} no cuenta con al menos 2000 valoraciones, por favor ingrese otra.'
+        respuesta = f'La película {titulo_de_la_filmacion} no cuenta con al menos 2000 valoraciones, por favor ingrese otra.'
         return {'error not found': respuesta}
     
     else:
