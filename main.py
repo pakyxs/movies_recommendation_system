@@ -122,14 +122,17 @@ def score_titulo(titulo_de_la_filmación:str):
     # Cargando datos del archivo csv
     df = pd.read_csv(dir+"/movies.csv", sep=",", low_memory=False)
     
-    response =[ ]
-    for idx, row in enumerate(df["title"]):  # Recorremos los valores de la columna title
-        if (row.lower() == titulo_de_la_filmación.lower()):  # Si el valor de la fila se encuentra dentro de la columna se guarda en la lista response en forma de diccionario
-            response.append( {
-            "título": df["title"][idx],
-            "anio": df["release_year"][idx],
-            "popularidad": df["popularity"][idx]
+    response = []
+
+    for row in df["title"]:
+        if row.lower() == titulo_de_la_filmación.lower():
+            idx = df["title"].tolist().index(row)  # Obtener el índice correspondiente al valor de la fila
+            response.append({
+                "título": df["title"][idx],
+                "anio": df["release_year"][idx],
+                "popularidad": df["popularity"][idx]
             })
+
     if len(response) == 0: # Si la lista está vacía quiere decir que no se encontró ningun valor, devuelve el siguiente mensaje.
         return print(f"La película {titulo_de_la_filmación} no se encontró, por favor ingrese otra.")
     else:
