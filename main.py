@@ -129,13 +129,15 @@ def score_titulo(titulo_de_la_filmación:str):
     df_match = df[df["title"].str.contains(titulo_de_la_filmación.lower())]
 
     # Si el df_match está vacío quiere decir que la película no se encuentra en el dataframe
-    if len(df_match) == 0: # Si la lista está vacía quiere decir que no se encontró ningun valor, devuelve el siguiente mensaje.
+    if len(df_match) == 0: 
         return print(f"La película {titulo_de_la_filmación} no se encontró, por favor ingrese otra.")
     
-    response = {"título": titulo_de_la_filmación.title(),
+    #response = {"título": titulo_de_la_filmación.title(),
+    #            "anio": df_match["release_year"].iloc[0],
+    #            "popularidad": df_match["popularity"].iloc[0]}
+    return {"título": titulo_de_la_filmación.title(),
                 "anio": df_match["release_year"].iloc[0],
                 "popularidad": df_match["popularity"].iloc[0]}
-    return response
 
 
 
