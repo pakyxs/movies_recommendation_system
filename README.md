@@ -84,7 +84,7 @@ Los datasets que consumí para el modelo fueron movies_dataset.csv y credits.csv
 4) Ejecutar el archivo ETL.ipynb que se encuentra en la carpeta notebooks:
    En este script se encuentran las transformaciones que le realizamos a los datasets para después ser consumidor por el modelo.
 5) Subir repositorio a nuestro GitHub.
-6) Crear una cuenta de render y desplegar el modelo ahí.
+6) Crear una cuenta en render.com y desplegar el modelo ahí.
 
 
 **`API endpoints:`**
